@@ -1,30 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using DemoWebApplication.Model;
+using Microsoft.Extensions.Localization;
 
 namespace DemoWebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        private DemoModel model;
+        private readonly IStringLocalizer<HomeController> _localizer;
+
+        public HomeController(IStringLocalizer<HomeController> localizer)
+        {
+            model = new DemoModel();
+            _localizer = localizer;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            model.Lang = HttpContext.GetMyCulture();
+
+            // IStringLocalizer uses CurrentUICulture by default
+            model.Message = _localizer["Message"];
+            ViewData["CurrentUICulture"] = CultureInfo.CurrentUICulture;
+            return View(model);
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult AcceptForm(DemoModel newModel)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                return Content("OK");
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        public IActionResult Contact()
+        public IActionResult GetCulture()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return Content(CultureInfo.CurrentCulture.Name);
         }
 
         public IActionResult Error()
