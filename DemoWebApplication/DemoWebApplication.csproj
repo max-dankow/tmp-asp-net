@@ -28,6 +28,12 @@
     <EmbeddedResource Update="Resources\Controllers\HomeController.ru.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ViewModels\DemoModel.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ViewModels\DemoModel.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Views\Home\Details.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Details.en.Designer.cs</LastGenOutput>

@@ -1,12 +1,12 @@
-﻿@using DemoWebApplication.Model
+﻿@using DemoWebApplication.ViewModels
+@using Microsoft.AspNetCore.Mvc.Rendering
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
-
-
 @model DemoModel
+
 @{
      var langName = Model.Lang?.Name ?? "not specified";
 }
@@ -14,14 +14,36 @@
 <p>Current Culture: @ViewData["CurrentUICulture"]</p>
 <p>Message: @Model.Message</p>
 
+@*
+    For some cultures decimal dot is used(for example jp), for others - comma. 
+    So, the way decimal is converted to string depends on Culture
+*@
+<p>Decimal: @Model.DecimalValue</p>
+
 <div style="border: solid red; padding: 10px">
     @Html.Partial("Details")
 </div>
 
-<form asp-controller="Home" asp-action="AcceptForm">
-    <label asp-for="Number"></label>
-    <input asp-for="Number" type="text"/>
-    <input type="submit" name="Accept"/>
-    <br>
-    <span asp-validation-for="Number"></span>
-</form>
+<div style="border: solid; padding: 10px; margin: 10px">
+    <form asp-controller="Home" asp-action="AcceptForm">
+        <label asp-for="Number"></label>
+        <input asp-for="Number" type="text"/>
+        <input type="submit" name="Accept"/>
+        <br>
+        <span asp-validation-for="Number"></span>
+    </form>
+</div>
+<div>
+    <h2>Coordinate</h2>
+    <form asp-controller="Home" asp-action="Coords">
+        <label asp-for="CoordinateFirst"></label>
+        <input asp-for="CoordinateFirst" type="text"/>
+        <span asp-validation-for="CoordinateFirst"></span>
+        <br/>
+        <label asp-for="CoordinateSecond"></label>
+        <input asp-for="CoordinateSecond" type="text"/>
+        <span asp-validation-for="CoordinateSecond"></span>
+        <br>
+        <input type="submit" name="Accept" />
+    </form>
+</div>

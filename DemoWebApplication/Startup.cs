@@ -34,7 +34,10 @@ namespace DemoWebApplication
             {
                 options.ResourcesPath = "Resources";
             });
-            services.AddMvc()
+            services.AddMvc(opts =>
+                {
+                    opts.ModelBinderProviders.Insert(0, new CoordinateBinderProvider());
+                })
                 .AddViewLocalization(options => options.ResourcesPath = "Resources")
                 .AddDataAnnotationsLocalization();
         }
