@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="err" xml:space="preserve">
-    <value>Number is out of range (in English)</value>
-  </data>
-  <data name="First" xml:space="preserve">
-    <value>First in english</value>
-  </data>
-  <data name="Second" xml:space="preserve">
-    <value>Second in English</value>
-  </data>
   <data name="CoordRequired" xml:space="preserve">
     <value>Coordinate required in english</value>
   </data>
-  <data name="Number" xml:space="preserve">
-    <value>Integer number</value>
+  <data name="Message" xml:space="preserve">
+    <value>Message in English</value>
+  </data>
+  <data name="OkLength" xml:space="preserve">
+    <value>Length is OK</value>
+  </data>
+  <data name="WrongLength" xml:space="preserve">
+    <value>Too long</value>
   </data>
 </root>

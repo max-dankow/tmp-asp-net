@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using DemoWebApplication.ViewModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -8,19 +9,20 @@ namespace DemoWebApplication
 {
     public class CoordinateBinder : IModelBinder
     {
-        private readonly IModelBinder fallbackBinder;
+        private readonly IModelBinder _fallbackBinder;
         public CoordinateBinder(IModelBinder fallbackBinder)
         {
-            this.fallbackBinder = fallbackBinder;
+            _fallbackBinder = fallbackBinder;
         }
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             try
             {
-                ValueProviderResult first = bindingContext.ValueProvider.GetValue("CoordinateFirst");
+                string bindingFieldName = bindingContext.FieldName;
+                ValueProviderResult first = bindingContext.ValueProvider.GetValue(bindingFieldName);
                 if (first == ValueProviderResult.None)
                 {
-                    return fallbackBinder.BindModelAsync(bindingContext);
+                    return _fallbackBinder.BindModelAsync(bindingContext);
                 }
 
                 string[] tokens = first.FirstValue.Split(',');
@@ -28,28 +30,31 @@ namespace DemoWebApplication
                 {
                     throw new ArgumentException();
                 }
-                // получаем значения
+
                 string xStr = tokens[0];
                 string yStr = tokens[1];
+                var x = decimal.Parse(xStr, CultureInfo.InvariantCulture);
+                var y = decimal.Parse(yStr, CultureInfo.InvariantCulture);
 
-                var result = new Coordinate() {X = decimal.Parse(xStr), Y = decimal.Parse(yStr)};
+                var result = new Coordinate() {X = x, Y =  y};
                 bindingContext.Result = ModelBindingResult.Success(result);
                 return Task.CompletedTask;
             }
             catch (Exception)
             {
-                return fallbackBinder.BindModelAsync(bindingContext);
+                return _fallbackBinder.BindModelAsync(bindingContext);
             }
         }
     }
+
     public class CoordinateBinderProvider : IModelBinderProvider
     {
-        private readonly IModelBinder binder =
+        private readonly IModelBinder _binder =
             new CoordinateBinder(new SimpleTypeModelBinder(typeof(Coordinate)));
 
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
-            return context.Metadata.ModelType == typeof(Coordinate) ? binder : null;
+            return context.Metadata.ModelType == typeof(Coordinate) ? _binder : null;
         }
     }
 }

@@ -31,18 +31,31 @@ namespace DemoWebApplication.ViewModels
         [BindNever]
         public string Message { get; set; }
 
-        [BindRequired]
+        [Display(Name = "Number")]
         [Required(ErrorMessage = "Number is not given")]
-        [Range(typeof(int), "1", "100", ErrorMessage = "err")]
+        [Range(typeof(int), "0", "100", ErrorMessage = "err")]
         public int Number { get; set; }
     
         [BindNever]
         public decimal DecimalValue { get; set; }
 
         [Display(Name = "First")]
-        public Coordinate CoordinateFirst { get; set; }
+        [Required(ErrorMessage = "CoordRequired")]
+        [FromBody]
+        [FromQuery] // For example: /Home/Coords?lang=ru&First=10,%2010&Second=0,%200
+        public Coordinate First { get; set; }
 
         [Display(Name = "Second")]
-        public Coordinate CoordinateSecond { get; set; }
+        [Required(ErrorMessage = "CoordRequired")]
+        [FromBody]
+        [FromQuery]
+        public Coordinate Second { get; set; }
+
+        public double Length()
+        {
+            var deltaX = (double) (First.X - Second.X);
+            var deltaY = (double) (First.Y - Second.Y);
+            return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+        }
     }
 }

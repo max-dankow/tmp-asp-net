@@ -118,12 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="err" xml:space="preserve">
-    <value>Число принимает недопустимое значение (0..100) (на Русском)</value>
+    <value>Число принимает недопустимое значение</value>
   </data>
   <data name="First" xml:space="preserve">
     <value>Первый</value>
   </data>
   <data name="Second" xml:space="preserve">
     <value>Второй</value>
+  </data>
+  <data name="CoordRequired" xml:space="preserve">
+    <value>Координаты необходимы</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Целое число</value>
   </data>
 </root>

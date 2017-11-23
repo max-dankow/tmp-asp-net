@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hello" xml:space="preserve">
-    <value>asdasdasd</value>
+  <data name="CoordRequired" xml:space="preserve">
+    <value>Координаты необходимы</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Сообщение на Русском</value>
+  </data>
+  <data name="OkLength" xml:space="preserve">
+    <value>Длинна допустима</value>
+  </data>
+  <data name="WrongLength" xml:space="preserve">
+    <value>Длинна превышает максимально допустимую</value>
   </data>
 </root>

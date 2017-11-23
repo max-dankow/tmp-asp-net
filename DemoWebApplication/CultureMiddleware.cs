@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DemoWebApplication
 {
-    public static class LangExtention
+    public static class LangExtension
     {
         public static CultureInfo GetMyCulture(this HttpContext context)
         {
@@ -15,9 +15,9 @@ namespace DemoWebApplication
     public class CultureMiddleware
     {
         private readonly RequestDelegate _next;
-        private string _culturePrameterName;
-        private ILogger<CultureMiddleware> _logger;
-        public static readonly object LangItemsKey = new object();
+        private readonly string _culturePrameterName;
+        private readonly ILogger<CultureMiddleware> _logger;
+        public static readonly object LangItemsKey = new object(); // Don't know exactly how to work with keys properly.
 
         public CultureMiddleware(RequestDelegate next, ILogger<CultureMiddleware> logger,
             string cultureParameterName = "lang")

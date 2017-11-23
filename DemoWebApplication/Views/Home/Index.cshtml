@@ -1,22 +1,24 @@
 ﻿@using DemoWebApplication.ViewModels
+@using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Mvc.Rendering
+
+@inject IViewLocalizer Localizer
+@model DemoModel
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
-@model DemoModel
-
 @{
      var langName = Model.Lang?.Name ?? "not specified";
 }
-<p>Model Culture: @langName</p>
-<p>Current Culture: @ViewData["CurrentUICulture"]</p>
+<p>@Localizer["ModelCulture"]: @langName</p>
+<p>@Localizer["CurrentUICulture"]: @ViewData["CurrentUICulture"]</p>
 <p>Message: @Model.Message</p>
 
 @*
     For some cultures decimal dot is used(for example jp), for others - comma. 
-    So, the way decimal is converted to string depends on Culture
+    So, the way decimal is converted to string depends on Culture.
 *@
 <p>Decimal: @Model.DecimalValue</p>
 
@@ -24,7 +26,8 @@
     @Html.Partial("Details")
 </div>
 
-<div style="border: solid; padding: 10px; margin: 10px">
+<div>
+    <h2>@Localizer["NumberForm"]</h2>
     <form asp-controller="Home" asp-action="AcceptForm">
         <label asp-for="Number"></label>
         <input asp-for="Number" type="text"/>
@@ -34,15 +37,15 @@
     </form>
 </div>
 <div>
-    <h2>Coordinate</h2>
+    <h2>@Localizer["Coordinates"]</h2>
     <form asp-controller="Home" asp-action="Coords">
-        <label asp-for="CoordinateFirst"></label>
-        <input asp-for="CoordinateFirst" type="text"/>
-        <span asp-validation-for="CoordinateFirst"></span>
+        <label asp-for="First"></label>
+        <input asp-for="First" type="text"/>
+        <span asp-validation-for="First"></span>
         <br/>
-        <label asp-for="CoordinateSecond"></label>
-        <input asp-for="CoordinateSecond" type="text"/>
-        <span asp-validation-for="CoordinateSecond"></span>
+        <label asp-for="Second"></label>
+        <input asp-for="Second" type="text"/>
+        <span asp-validation-for="Second"></span>
         <br>
         <input type="submit" name="Accept" />
     </form>

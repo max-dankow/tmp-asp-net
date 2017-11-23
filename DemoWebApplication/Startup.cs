@@ -57,7 +57,8 @@ namespace DemoWebApplication
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-//          Solution using default UseRequestLocalization
+
+            // Solution using default UseRequestLocalization
 //            var supportedCultures = new[]
 //            {
 //                new CultureInfo("en-US"),
@@ -86,13 +87,14 @@ namespace DemoWebApplication
 //                
 //            });
 
+            // Solution using custom middleware
             app.UseMiddleware<CultureMiddleware>("lang");
             
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}");
             });
         }
     }
